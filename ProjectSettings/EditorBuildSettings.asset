@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 039b7a80875a6d6499b15f84a6eb647e
   - enabled: 1
+    path: Assets/Scenes/Connect.unity
+    guid: 652873b3d94cde34ebc94bf5f98e2490
+  - enabled: 1
     path: Assets/Scenes/Lobby.unity
     guid: abc4649c7a3165846ab437fe568e6548
   - enabled: 1
@@ -17,7 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CardGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ShooterGame.unity
     guid: 492efa31d0375774981b057c7fe9f5d7
   m_configObjects: {}

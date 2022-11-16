@@ -36,7 +36,10 @@ public class PropertySetting : MonoBehaviourPunCallbacks
             // dan kirim ke server
             SetCustomPropertyToServer(initialValue);
         }
+    }
 
+    private void Update()
+    {
         // UI hanya interactable untuk master saja
         if (PhotonNetwork.IsMasterClient == false)
         {

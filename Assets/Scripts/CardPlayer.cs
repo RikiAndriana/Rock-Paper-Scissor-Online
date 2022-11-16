@@ -19,11 +19,13 @@ public class CardPlayer : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip damageClip;
     public TMP_Text NickName { get => nameText; }
+    public bool isP1;
 
     private void Start()
     {
         Health = MaxHealt;
     }
+
     public Attack? AttackValue
     {
         get => chosenCard == null ? null : chosenCard.AttackValue;
@@ -58,7 +60,9 @@ public class CardPlayer : MonoBehaviour
         }
 
         chosenCard = newCard;
-        chosenCard.transform.DOScale(chosenCard.transform.localScale * 1.2f, 0.2f);
+
+        if (isP1)
+            chosenCard.transform.DOScale(chosenCard.transform.localScale * 1.2f, 0.2f);
     }
 
     public void ChangeHealt(float amount)

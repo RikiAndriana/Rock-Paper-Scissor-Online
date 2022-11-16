@@ -9,13 +9,13 @@ public class ConnectManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] TMP_InputField usernameInput;
     [SerializeField] TMP_Text feedbackText;
-    [SerializeField] GameObject lobbyPanel;
 
     private void Start()
     {
-        lobbyPanel.SetActive(false);
+        Application.runInBackground = true;
         usernameInput.text = PlayerPrefs.GetString(PropertyNames.Player.NickName, "");
     }
+
     public void ClickConnect()
     {
         if (usernameInput.text.Length < 3)
@@ -33,12 +33,16 @@ public class ConnectManager : MonoBehaviourPunCallbacks
         feedbackText.text = "Connecting...";
     }
 
+    public void ClickBack()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     // dijalankan ketika sudah connect
     public override void OnConnectedToMaster()
     {
         feedbackText.text = "Connected";
-        lobbyPanel.SetActive(true);
-        PhotonNetwork.JoinLobby();
+        SceneManager.LoadScene("Lobby");
         StartCoroutine(LoadSceneAfterConnectedAndReady());
     }
     IEnumerator LoadSceneAfterConnectedAndReady()

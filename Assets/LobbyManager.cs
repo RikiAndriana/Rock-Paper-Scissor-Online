@@ -5,6 +5,7 @@ using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
@@ -28,8 +29,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         roomPanel.SetActive(false);
+        PhotonNetwork.JoinLobby();
         Application.runInBackground = true;
-
     }
     public void ClickCreateRoom()
     {
@@ -40,13 +41,27 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
 
         RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = 5;
+        roomOptions.MaxPlayers = 2;
         PhotonNetwork.CreateRoom(newRoomInputField.text, roomOptions);
 
         // untuk join random
         // PhotonNetwork.JoinOrCreateRoom(newRoomInputField.text);
         // PhotonNetwork.JoinRandomRoom();
     }
+    public void ClickLeaveRoom()
+    {
+        StartCoroutine(LeaveRoom());
+    }
+
+    IEnumerator LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+        while (PhotonNetwork.InRoom || PhotonNetwork.IsConnectedAndReady == false)
+            yield return null;
+
+        SceneManager.LoadScene("Lobby");
+    }
+
     public void ClickStartGame(string levelName)
     {
         if (PhotonNetwork.IsMasterClient)
